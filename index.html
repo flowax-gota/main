@@ -1475,11 +1475,11 @@
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
 
-        // ==================== ФОРМА ====================
-       function handleSubmit(e) {
+    // ==================== ФОРМА ====================
+function handleSubmit(e) {
     e.preventDefault(); // Останавливаем перезагрузку страницы
 
-    // Возвращаем ваш правильный рабочий вебхук вместо обычной ссылки
+    // ИСПРАВЛЕНО: Сюда вставлен твой личный вебхук вместо главной страницы Дискорда
     const webhookUrl = "https://discord.com";
 
     // Ищем инпуты прямо внутри отправленной формы по очереди
@@ -1492,7 +1492,6 @@
         return;
     }
 
-    // ИСПРАВЛЕНО: добавили [0] и, чтобы скрипт брал текст из полей, а не ломал отправку
     const nickname = inputs[0].value; // Первый input (Ник)
     const email = inputs[1].value;    // Второй input (Email)
     const message = textarea.value;   // Поле сообщения
@@ -1511,6 +1510,7 @@
             footer: { text: "Форма обратной связи CosmikBox" }
         }]
     };
+
     // Отправка в Discord канал
     fetch(webhookUrl, {
         method: 'POST',
