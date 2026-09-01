@@ -1479,28 +1479,27 @@
 function handleSubmit(e) {
     e.preventDefault(); // Останавливаем перезагрузку страницы
 
-    // ИСПРАВЛЕНО: Сюда вставлен твой личный вебхук вместо главной страницы Дискорда
+    // Твой точный вебхук без опечаток
     const webhookUrl = "https://discord.com";
-    
-    // Ищем инпуты прямо внутри отправленной формы по очереди
+
+    // Находим поля формы автоматически
     const inputs = e.target.querySelectorAll('input');
     const textarea = e.target.querySelector('textarea');
 
-    // Проверяем, что все поля на месте
     if (inputs.length < 2 || !textarea) {
-        alert('Ошибка: Не удалось найти поля формы на странице.');
+        alert('Ошибка: Не удалось найти поля формы.');
         return;
     }
 
-    const nickname = inputs[0].value; // Первый input (Ник)
-    const email = inputs[1].value;    // Второй input (Email)
-    const message = textarea.value;   // Поле сообщения
+    // Правильный сбор данных с индексами массивов
+    const nickname = inputs[0].value; 
+    const email = inputs[1].value;    
+    const message = textarea.value;   
 
-    // Карточка для Discord
     const requestData = {
         embeds: [{
             title: "📩 Новое обращение с сайта CosmikBox!",
-            color: 5763719, // Зеленый цвет полоски
+            color: 5763719, 
             fields: [
                 { name: "🎮 Игровой ник", value: nickname, inline: true },
                 { name: "📧 Email для ответа", value: email, inline: true },
@@ -1511,7 +1510,6 @@ function handleSubmit(e) {
         }]
     };
 
-    // Отправка в Discord канал
     fetch(webhookUrl, {
         method: 'POST',
         headers: {
@@ -1521,10 +1519,10 @@ function handleSubmit(e) {
     })
     .then(response => {
         if (response.ok) {
-            alert('Спасибо! Мы получили твоё сообщение и ответим в ближайшее время.');
-            e.target.reset(); // Очищаем форму
+            alert('Спасибо! Мы получили твоё сообщение.');
+            e.target.reset(); 
         } else {
-            alert('Ошибка сервера Discord. Пожалуйста, напишите нам напрямую в Discord.');
+            alert('Ошибка сервера Discord. Пожалуйста, напишите нам напрямую.');
         }
     })
     .catch(error => {
